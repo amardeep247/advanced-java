@@ -19,6 +19,7 @@ public class GenericServletDemo extends GenericServlet {
 
     @Override
     public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+        System.out.println("calling service");
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
@@ -27,5 +28,19 @@ public class GenericServletDemo extends GenericServlet {
         out.println("<p>Service Called</p>");
         out.println("</body></html>");
     }
+
+    @Override
+    public void init() throws ServletException {
+        System.out.println("calling init");
+        super.init(); 
+    }
+
+    @Override
+    public void destroy() {
+        System.out.println("calling destroy");
+        super.destroy(); 
+    }
+    
+    
 
 }

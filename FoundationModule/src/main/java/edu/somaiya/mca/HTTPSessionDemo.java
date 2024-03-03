@@ -38,20 +38,28 @@ public class HTTPSessionDemo extends HttpServlet {
          String username =  (String) session.getAttribute("username");
         
         // using Cookie
-        /**
-         * Cookie[] cookies = request.getCookies(); String username = null; for
-         * (Cookie cookie : cookies) { if ("username".equals(cookie.getName()))
-         * { username = cookie.getValue(); break; }
+        
+         Cookie[] cookies = request.getCookies(); 
+         String course = null; 
+         for(Cookie cookie : cookies) { 
+             if ("course".equals(cookie.getName()))
+                { 
+                    course = cookie.getValue(); 
+                    break; 
+                }
        }
-         */
+         
         // using URL Rewrite
-       // String username = request.getParameter("username");
+        String rollno = request.getParameter("rollno");
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
-        out.println("<h2>Session Attributes:</h2>");
-        out.println("<p>Username: " + username + "</p>");
+        out.println("<h2>Session Tracking:</h2>");
+        out.println("<p>Roll#: " + rollno + " (From URL Re write)</p>");
+        out.println("<p>Username: " + username + " (From session)</p>");
+        out.println("<p>Course: " + course + "(From cookie)</p>");
+         
         out.println("</body></html>");
     }
 

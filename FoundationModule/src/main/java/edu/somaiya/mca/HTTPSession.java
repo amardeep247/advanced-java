@@ -33,14 +33,14 @@ public class HTTPSession extends HttpServlet {
             throws ServletException, IOException {
         // using HttpSession
         HttpSession session = request.getSession();
-        session.setAttribute("username", "MCA-HttpSession");
+        session.setAttribute("username", "ABC");
 
         // using cookies
-        //Cookie usernameCookie = new Cookie("username", "MCA-Cookie");
-        //response.addCookie(usernameCookie);
+        Cookie usernameCookie = new Cookie("course", "MCA");
+        response.addCookie(usernameCookie);
         
         // using URL re write
-        //response.sendRedirect("HTTPSessionDemo?username=MCA-Rewrite");
+        response.sendRedirect("HTTPSessionDemo?rollno=1");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

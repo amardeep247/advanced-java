@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jdk.nashorn.internal.ir.RuntimeNode;
 
 /**
  *
@@ -24,6 +25,7 @@ public class ServletConfigDemo extends HttpServlet {
     public void init() throws ServletException {
         // Retrieve the initialization parameter from ServletConfig
         message = getServletConfig().getInitParameter("message");
+        
     }
 
     /**
@@ -39,9 +41,12 @@ public class ServletConfigDemo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
+        
+       String userAgent = request.getHeader("User-Agent");
 
         response.getWriter().println("<html><head><title>Servlet Config Demo</title></head><body>");
         response.getWriter().println("<h2>" + message + "</h2>");
+        response.getWriter().println("<h2>"+userAgent+"</h2>");
         response.getWriter().println("</body></html>");
     }
 

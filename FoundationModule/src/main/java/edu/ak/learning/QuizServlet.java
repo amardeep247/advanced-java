@@ -2,22 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package edu.somaiya.mca;
+package edu.ak.learning;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author amard
- * Program to demonstrate Servlet Config (web.xml), Http Headers.
+ * @author amard 
+ * Program to demonstrate online web applications (Online Quiz
+ * etc).
  */
-public class ServletHeadersDemo extends HttpServlet {
+public class QuizServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,22 +33,17 @@ public class ServletHeadersDemo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+        List<Question> questions = getQuizQuestions();
 
-        out.println("HTTP headers sent by client:<br>");
+        HttpSession session = request.getSession();
+        session.setAttribute("questions", questions);
+        session.setAttribute("currentQuestionIndex", 0);
+        session.setAttribute("score", 0);
 
-        Enumeration headers = request.getHeaderNames();
-
-        while (headers.hasMoreElements()) {
-            String headerName = (String) headers.nextElement();
-            String headerValue = request.getHeader(headerName);
-            out.print("<b>" + headerName + "</b>: ");
-            out.println(headerValue + "<br>");
-        }
+        request.getRequestDispatcher("quiz.jsp").forward(request, response);
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -84,4 +82,13 @@ public class ServletHeadersDemo extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private List<Question> getQuizQuestions() {
+        List<Question> questions = new ArrayList<>();
+        // Exercise work to fetch the data from data base
+
+        questions.add(new Question(1, "You're 4th place right now in a race. What place will you be in when you pass the person in 3rd place?", "1st", "2nd", "3rd", "C"));
+        questions.add(new Question(2, "Divide 30 by half and add ten?", "20", "25", "70", "C"));
+
+        return questions;
+    }
 }

@@ -2,21 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package edu.somaiya.mca;
+package edu.ak.learning;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author amard
- * Program to demonstrate Generic and HTTP Servlet response and request objects.
+ * Program to demonstrate Http session using cookies, URL rewritten, Hidden Fields.
  */
-public class HttpServletDemo extends HttpServlet {
+public class HTTPSession extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,24 +31,16 @@ public class HttpServletDemo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HttpServletDemo</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>HTTP Servlet Demo ! </h1>");
-            out.println("<h2>Roll# 1</h2>");
-            out.println("<h1>Servlet HttpServletDemo at " + request.getContextPath() + " !</h1>");
-            out.println("<p>Request URI: " + request.getRequestURI() + "</p>");
-            out.println("<p>HTTP Method: " + request.getMethod() + "</p>");
-            out.println("<p>Client IP Address: " + request.getRemoteAddr() + "</p>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        // using HttpSession
+        HttpSession session = request.getSession();
+        session.setAttribute("username", "ABC");
+
+        // using cookies
+        Cookie usernameCookie = new Cookie("course", "MCA");
+        response.addCookie(usernameCookie);
+        
+        // using URL re write
+        response.sendRedirect("HTTPSessionDemo?rollno=1");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -90,6 +84,4 @@ public class HttpServletDemo extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-   
-    
 }

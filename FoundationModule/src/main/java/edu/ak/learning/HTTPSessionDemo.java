@@ -2,13 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package edu.somaiya.mca;
+package edu.ak.learning;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +15,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author amard 
- * Program to demonstrate online web applications (Online Quiz
- * etc).
+ * @author amard
+ * Program to demonstrate Http session using cookies, URL rewritten, Hidden Fields.
  */
-public class QuizServlet extends HttpServlet {
+public class HTTPSessionDemo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,14 +31,36 @@ public class QuizServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Question> questions = getQuizQuestions();
 
-        HttpSession session = request.getSession();
-        session.setAttribute("questions", questions);
-        session.setAttribute("currentQuestionIndex", 0);
-        session.setAttribute("score", 0);
+        //using HttpSession
+       
+         HttpSession session = request.getSession();
+         String username =  (String) session.getAttribute("username");
+        
+        // using Cookie
+        
+         Cookie[] cookies = request.getCookies(); 
+         String course = null; 
+         for(Cookie cookie : cookies) { 
+             if ("course".equals(cookie.getName()))
+                { 
+                    course = cookie.getValue(); 
+                    break; 
+                }
+       }
+         
+        // using URL Rewrite
+        String rollno = request.getParameter("rollno");
 
-        request.getRequestDispatcher("quiz.jsp").forward(request, response);
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        out.println("<h2>Session Tracking:</h2>");
+        out.println("<p>Roll#: " + rollno + " (From URL Re write)</p>");
+        out.println("<p>Username: " + username + " (From session)</p>");
+        out.println("<p>Course: " + course + "(From cookie)</p>");
+         
+        out.println("</body></html>");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,6 +75,7 @@ public class QuizServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("inside doGet Method");
         processRequest(request, response);
     }
 
@@ -69,6 +90,7 @@ public class QuizServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("inside doPost Method");
         processRequest(request, response);
     }
 
@@ -82,13 +104,4 @@ public class QuizServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private List<Question> getQuizQuestions() {
-        List<Question> questions = new ArrayList<>();
-        // Exercise work to fetch the data from data base
-
-        questions.add(new Question(1, "You're 4th place right now in a race. What place will you be in when you pass the person in 3rd place?", "1st", "2nd", "3rd", "C"));
-        questions.add(new Question(2, "Divide 30 by half and add ten?", "20", "25", "70", "C"));
-
-        return questions;
-    }
 }

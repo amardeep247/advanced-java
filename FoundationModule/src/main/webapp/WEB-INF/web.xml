@@ -2,23 +2,23 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>HttpServletDemo</servlet-name>
-        <servlet-class>edu.somaiya.mca.HttpServletDemo</servlet-class>
+        <servlet-class>edu.ak.learning.HttpServletDemo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HTTPSessionDemo</servlet-name>
-        <servlet-class>edu.somaiya.mca.HTTPSessionDemo</servlet-class>
+        <servlet-class>edu.ak.learning.HTTPSessionDemo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HTTPSession</servlet-name>
-        <servlet-class>edu.somaiya.mca.HTTPSession</servlet-class>
+        <servlet-class>edu.ak.learning.HTTPSession</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GenericServletDemo</servlet-name>
-        <servlet-class>edu.somaiya.mca.GenericServletDemo</servlet-class>
+        <servlet-class>edu.ak.learning.GenericServletDemo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServletConfigDemo</servlet-name>
-        <servlet-class>edu.somaiya.mca.ServletConfigDemo</servlet-class>
+        <servlet-class>edu.ak.learning.ServletConfigDemo</servlet-class>
         <init-param>
             <param-name>message</param-name>
             <param-value>Message from Servlet Config!</param-value>
@@ -26,15 +26,15 @@
     </servlet>
     <servlet>
         <servlet-name>ServletHeadersDemo</servlet-name>
-        <servlet-class>edu.somaiya.mca.ServletHeadersDemo</servlet-class>
+        <servlet-class>edu.ak.learning.ServletHeadersDemo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>QuizServlet</servlet-name>
-        <servlet-class>edu.somaiya.mca.QuizServlet</servlet-class>
+        <servlet-class>edu.ak.learning.QuizServlet</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>SubmitQuizServlet</servlet-name>
-         <servlet-class>edu.somaiya.mca.SubmitQuizServlet</servlet-class>
+        <servlet-class>edu.ak.learning.SubmitQuizServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HttpServletDemo</servlet-name>

@@ -1,5 +1,5 @@
 <%@page import="java.util.List"%>
-<%@page import="edu.somaiya.mca.Question"%>
+<%@page import="edu.ak.learning.Question"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>

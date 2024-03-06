@@ -2,23 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package edu.somaiya.mca;
+package edu.ak.learning;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author amard
- * Program to demonstrate Http session using cookies, URL rewritten, Hidden Fields.
+ * Program to demonstrate Generic and HTTP Servlet response and request objects.
  */
-public class HTTPSessionDemo extends HttpServlet {
+public class HttpServletDemo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,36 +29,24 @@ public class HTTPSessionDemo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        //using HttpSession
-       
-         HttpSession session = request.getSession();
-         String username =  (String) session.getAttribute("username");
-        
-        // using Cookie
-        
-         Cookie[] cookies = request.getCookies(); 
-         String course = null; 
-         for(Cookie cookie : cookies) { 
-             if ("course".equals(cookie.getName()))
-                { 
-                    course = cookie.getValue(); 
-                    break; 
-                }
-       }
-         
-        // using URL Rewrite
-        String rollno = request.getParameter("rollno");
-
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h2>Session Tracking:</h2>");
-        out.println("<p>Roll#: " + rollno + " (From URL Re write)</p>");
-        out.println("<p>Username: " + username + " (From session)</p>");
-        out.println("<p>Course: " + course + "(From cookie)</p>");
-         
-        out.println("</body></html>");
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet HttpServletDemo</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>HTTP Servlet Demo ! </h1>");
+            out.println("<h2>Roll# 1</h2>");
+            out.println("<h1>Servlet HttpServletDemo at " + request.getContextPath() + " !</h1>");
+            out.println("<p>Request URI: " + request.getRequestURI() + "</p>");
+            out.println("<p>HTTP Method: " + request.getMethod() + "</p>");
+            out.println("<p>Client IP Address: " + request.getRemoteAddr() + "</p>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,7 +61,7 @@ public class HTTPSessionDemo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("inside doGet Method");
+        System.out.println("inside doGet method");
         processRequest(request, response);
     }
 
@@ -90,7 +76,7 @@ public class HTTPSessionDemo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("inside doPost Method");
+        System.out.println("inside doPost method");
         processRequest(request, response);
     }
 
@@ -104,4 +90,6 @@ public class HTTPSessionDemo extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+   
+    
 }

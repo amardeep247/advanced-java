@@ -6,9 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ page import="edu.somaiya.mca.User" %>
+<%@ page import="edu.ak.learning.User" %>
 
-<jsp:useBean id="user" class="edu.somaiya.mca.User" scope="session" />
+<jsp:useBean id="user" class="edu.ak.learning.User" scope="session" />
 <jsp:setProperty name="user" property="username" value="ABC" />
 <jsp:setProperty name="user" property="email" value="abc@gmail.com" />
 

@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<%@ page import="edu.somaiya.mca.DataDAO" %>
+<%@ page import="edu.ak.learning.DataDAO" %>
 <html>
     <body>   
 
